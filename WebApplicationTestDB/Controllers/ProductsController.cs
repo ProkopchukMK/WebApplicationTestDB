@@ -10,6 +10,7 @@ namespace WebApplicationTestDB.Controllers
 {
     public class ProductsController : ApiController
     {
+
         Product[] products = new Product[]
         {
             new Product { Id = 1, Name = "Tomato Soup", Category = "Groceries", Price = 1 },
@@ -20,14 +21,15 @@ namespace WebApplicationTestDB.Controllers
         {
             return products;
         }
-        public IHttpActionResult GetProduct(int id)
+        [HttpGet]
+        public Product GetProducts(int id)
         {
             var product = products.FirstOrDefault(p => p.Id == id);
             if(product == null)
             {
-                return NotFound();
+                return new Product();
             }
-            return Ok();
+            return product;
         }
     }
 }
